@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+{% block content %}
+    <ul>
+        {% for post in object_list %}
+            <li><a href="{% url 'detail' post.pk %}">{{post.title}}</a> - {{post.author}} -
+                {% if user.is_superuser %}
+                <a href="{% url 'update_post' post.pk %}">(Edit)</a> - <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
+                {% endif %}
+                <br>
+                {{ post.post_date }}
+                <br>
+                <br>
+                {{post.body|slice:200}}
+                <br>
+            </li>
+        {%endfor%}
+    </ul>
+{% endblock %}
